@@ -8,16 +8,39 @@ group = "com.abocha"
 version = "0.0.1"
 
 application {
-    tasks.withType<Jar> {
+    /*tasks.withType<Jar> {
         manifest {
-            attributes["Main-Class"] = "ApplicationKt"
+            attributes["Main-Class"] = "com.abocha.ApplicationKt"
         }
     }
-    mainClass.set("ApplicationKt")
+    mainClass.set("com.abocha.ApplicationKt")*/
+
+    mainClass.set("io.ktor.server.netty.EngineMain")
 
     val isDevelopment: Boolean = project.ext.has("development")
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
 }
+
+/*tasks {
+    jar {
+        // Добавляем manifest с указанием main класса
+        manifest {
+            attributes["Main-Class"] = application.mainClass.get()
+        }
+        // Добавляем все jar-зависимости в jar-архив (очень важно для Render)
+        from(configurations.runtimeClasspath.map {
+            if(it is File) {
+                if (it.isDirectory) it else zipTree(it)
+            } else {
+                zipTree(it.singleFile)
+            }
+        })
+
+
+        // Вариант для включения ресурсов (если нужно)
+        from(sourceSets.main.get().resources.srcDirs)
+    }
+}*/
 
 repositories {
     mavenCentral()
