@@ -1,4 +1,3 @@
-
 plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.ktor)
@@ -8,19 +7,11 @@ group = "com.abocha"
 version = "0.0.1"
 
 application {
-    /*tasks.withType<Jar> {
-        manifest {
-            attributes["Main-Class"] = "com.abocha.ApplicationKt"
-        }
-    }
-    mainClass.set("com.abocha.ApplicationKt")*/
-
-    mainClass.set("io.ktor.server.netty.EngineMain")
+    mainClass.set("com.abocha.ApplicationKt")
 
     val isDevelopment: Boolean = project.ext.has("development")
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
 }
-
 
 repositories {
     mavenCentral()
