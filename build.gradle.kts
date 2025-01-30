@@ -2,13 +2,17 @@
 plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.ktor)
-    application
 }
 
 group = "com.abocha"
 version = "0.0.1"
 
 application {
+    tasks.withType<Jar> {
+        manifest {
+            attributes["Main-Class"] = "com.abocha.ApplicationKt"
+        }
+    }
     mainClass.set("com.abocha.ApplicationKt")
 
     val isDevelopment: Boolean = project.ext.has("development")
