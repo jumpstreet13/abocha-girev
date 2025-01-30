@@ -26,7 +26,7 @@ FROM eclipse-temurin:17-jre-jammy
 WORKDIR /app
 
 # Копируем fat jar из этапа сборки
-COPY --from=builder /app/build/libs/*.jar app-all.jar
+COPY --from=builder /app/build/libs/girev-all.jar app.jar
 
 # Открываем порт, на котором работает Ktor
 EXPOSE 8080
