@@ -1,4 +1,35 @@
-FROM openjdk:17-jdk-alpine3.14
+# App Building phase --------
+FROM openjdk:8 AS build
+
+RUN mkdir /appbuild
+COPY . /appbuild
+
+WORKDIR /appbuild
+
+RUN ./gradlew clean build
+# End App Building phase --------
+
+# Container setup --------
+FROM openjdk:8-jre-alpine
+
+# Creating user
+ENV APPLICATION_USER 1033
+RUN adduser -D -g '' $APPLICATION_USER
+
+# Giving permissions
 RUN mkdir /app
-COPY /build/libs/girev-all.jar /app/app.jar
-ENTRYPOINT ["java","-jar","/app/app.jar"]
+RUN mkdir /app/resources
+RUN chown -R $APPLICATION_USER /app
+RUN chmod -R 755 /app
+
+# Setting user to use when running the image 
+USER $APPLICATION_USER
+
+# Copying needed files
+COPY --from=build /build/libs/girev-all.jar /app/girevAbochaNovell.jar
+COPY --from=build /resources/ /app/resources/
+WORKDIR /app
+
+# Entrypoint definition
+CMD ["sh", "-c", "java -server -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -XX:InitialRAMFraction=2 -XX:MinRAMFraction=2 -XX:MaxRAMFraction=2 -XX:+UseG1GC -XX:MaxGCPauseMillis=100 -XX:+UseStringDeduplication -jar KtorEasy.jar"]
+# End Container setup --------
