@@ -17,6 +17,7 @@ RUN ./gradlew dependencies
 COPY src src
 
 # Собираем приложение (создаем fat jar)
+RUN ./gradlew clean
 RUN ./gradlew buildFatJar
 
 # Этап запуска (runtime stage)
