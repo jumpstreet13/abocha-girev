@@ -12,11 +12,11 @@ application {
 
     tasks.withType<Jar> {
         manifest {
-            attributes["Main-Class"] = "com.abocha.Application"
+            attributes["Main-Class"] = "io.ktor.server.netty.EngineMain"
         }
     }
-    //mainClass.set("io.ktor.server.netty.EngineMain")
-    mainClass.set("com.abocha.Application")
+    mainClass.set("io.ktor.server.netty.EngineMain")
+    //mainClass.set("com.abocha.Application")
 
     val isDevelopment: Boolean = project.ext.has("development")
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
