@@ -9,14 +9,7 @@ group = "com.abocha"
 version = "0.0.1"
 
 application {
-
-    tasks.withType<Jar> {
-        manifest {
-            attributes["Main-Class"] = "com.abocha.ApplicationKt"
-        }
-    }
     mainClass.set("com.abocha.ApplicationKt")
-    //mainClass.set("com.abocha.Application")
 
     val isDevelopment: Boolean = project.ext.has("development")
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
