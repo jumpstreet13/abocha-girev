@@ -21,26 +21,6 @@ application {
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
 }
 
-/*tasks {
-    jar {
-        // Добавляем manifest с указанием main класса
-        manifest {
-            attributes["Main-Class"] = application.mainClass.get()
-        }
-        // Добавляем все jar-зависимости в jar-архив (очень важно для Render)
-        from(configurations.runtimeClasspath.map {
-            if(it is File) {
-                if (it.isDirectory) it else zipTree(it)
-            } else {
-                zipTree(it.singleFile)
-            }
-        })
-
-
-        // Вариант для включения ресурсов (если нужно)
-        from(sourceSets.main.get().resources.srcDirs)
-    }
-}*/
 
 repositories {
     mavenCentral()

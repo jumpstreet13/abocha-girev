@@ -17,7 +17,7 @@ RUN ./gradlew dependencies
 COPY src src
 
 # Собираем приложение (создаем fat jar)
-RUN ./gradlew jar
+RUN ./gradlew buildFatJar
 
 # Этап запуска (runtime stage)
 FROM eclipse-temurin:17-jre-jammy
@@ -26,7 +26,7 @@ FROM eclipse-temurin:17-jre-jammy
 WORKDIR /app
 
 # Копируем fat jar из этапа сборки
-COPY --from=builder /app/build/libs/girev-all.jar app.jar
+COPY --from=builder /app/build/libs/*.jar app.jar
 
 # Открываем порт, на котором работает Ktor
 EXPOSE 8080
