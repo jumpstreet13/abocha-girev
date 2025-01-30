@@ -1,4 +1,4 @@
 FROM openjdk:17-jdk-alpine3.14
 RUN mkdir /app
-COPY ./build/libs/girev-all.jar /app/app.jar
+COPY /build/libs/girev-all.jar /app/app.jar
 ENTRYPOINT ["java","-jar","/app/app.jar"]
