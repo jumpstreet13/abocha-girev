@@ -12,10 +12,10 @@ application {
 
     tasks.withType<Jar> {
         manifest {
-            attributes["Main-Class"] = "io.ktor.server.netty.EngineMain"
+            attributes["Main-Class"] = "com.abocha.ApplicationKt"
         }
     }
-    mainClass.set("io.ktor.server.netty.EngineMain")
+    mainClass.set("com.abocha.ApplicationKt")
     //mainClass.set("com.abocha.Application")
 
     val isDevelopment: Boolean = project.ext.has("development")
